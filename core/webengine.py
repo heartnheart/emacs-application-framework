@@ -932,6 +932,10 @@ class BrowserBuffer(Buffer):
             self.settings.setAttribute(QWebEngineSettings.WebAttribute.JavascriptCanAccessClipboard, self.enable_javascript_access_clipboard)
             self.settings.setAttribute(QWebEngineSettings.WebAttribute.ShowScrollBars, self.enable_scrollbar)
 
+            # Make sure
+            self.settings.setAttribute(QWebEngineSettings.WebAttribute.ScreenCaptureEnabled, True)
+            self.settings.setAttribute(QWebEngineSettings.WebAttribute.WebRTCPublicInterfacesOnly, False)
+
             if self.unknown_url_scheme_policy == "DisallowUnknownUrlSchemes":
                 self.settings.setUnknownUrlSchemePolicy(self.settings.UnknownUrlSchemePolicy.DisallowUnknownUrlSchemes)
             elif self.unknown_url_scheme_policy == "AllowUnknownUrlSchemesFromUserInteraction":
