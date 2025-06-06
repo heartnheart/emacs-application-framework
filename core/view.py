@@ -94,6 +94,8 @@ class View(QWidget):
         # Add graphics view.
         self.layout.addWidget(self.graphics_view)
 
+        # 先 resize 到 1 可以减少白色方块的大小
+        self.resize(1, 1)
         # NOTE: show function must start before resize to trigger *first* resizeEvent after show.
         self.show()
 
@@ -198,6 +200,8 @@ class View(QWidget):
             qwindow.setParent(QWindow.fromWinId(int(self.emacs_xid)))    # type: ignore
 
         qwindow.setPosition(QPoint(self.x, self.y))
+        # 否则会跟 which-key-posframe 或者 vertico-posframe 层级产生冲突
+        self.lower()
 
     def try_show_top_view(self):
         if get_emacs_func_cache_result("eaf-emacs-not-use-reparent-technology", []):
