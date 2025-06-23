@@ -1380,8 +1380,10 @@ of `eaf--buffer-app-name' inside the EAF buffer."
 
 (defun eaf--show-message (format-string eaf-prefix logging)
   "A wrapper around `message' that prepend [EAF/app-name] before FORMAT-STRING."
-  (let* ((eaf-prefix (if (equal eaf-prefix "TRUE") t nil))
-         (logging (if (equal logging "TRUE") t nil))
+  (let* (
+         ;; eaf.py 发送过来的已经是 t 而不是 TRUE 了
+         ;; (eaf-prefix (if (equal eaf-prefix "TRUE") t nil))
+         ;; (logging (if (equal logging "TRUE") t nil))
          (fmt (cond ((not eaf-prefix) "%s")
                     (eaf--buffer-app-name (concat "[EAF/" eaf--buffer-app-name "] %s"))
                     (t "[EAF] %s"))))
